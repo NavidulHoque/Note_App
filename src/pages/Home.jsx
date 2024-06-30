@@ -34,20 +34,20 @@ const Home = () => {
     }
 
     return (
-        <div className="bg-slate-100 flex justify-center items-center basis-[645px]">
+        <div className="bg-slate-100 dark:bg-black flex justify-center items-center basis-[645px]">
 
-            <div className="flex flex-col items-start gap-y-2 rounded-md p-[10px] text-[24px] w-[80vw] sm:basis-[600px] bg-white shadow-md">
+            <div className="flex flex-col items-start gap-y-2 rounded-md p-[10px] text-[24px] w-[80vw] sm:basis-[600px] bg-white dark:bg-[rgb(50,50,50)] shadow-md">
 
-                <h1 className="text-center text-[30px] w-full">Add Your Notes</h1>
+                <h1 className="text-center text-[30px] w-full dark:text-white">Add Your Notes</h1>
 
-                <input className="p-[5px] w-full rounded-md border-[2px] border-[#3498db] outline-none" type="text" placeholder="Title" autoFocus onChange={(e) => {
+                <input className="p-[5px] w-full rounded-md border-[2px] border-[#3498db] outline-none dark:bg-[rgb(50,50,50)] dark:text-white" type="text" placeholder="Title" autoFocus onChange={(e) => {
 
                     setTitle(e.target.value)
                     localStorage.setItem("title", JSON.stringify(e.target.value))
 
                 }} value={title} />
 
-                <textarea className="p-[5px] w-full rounded-md border-[2px] border-[#3498db] outline-none resize-none" placeholder="Description" maxLength={200} rows={4} onChange={(e) => {
+                <textarea className="p-[5px] w-full rounded-md border-[2px] border-[#3498db] outline-none resize-none dark:bg-[rgb(50,50,50)] dark:text-white" placeholder="Description" maxLength={200} rows={4} onChange={(e) => {
 
                     setDescription(e.target.value)
                     localStorage.setItem("description", JSON.stringify(e.target.value))

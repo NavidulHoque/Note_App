@@ -6,7 +6,7 @@ const SavedNotes = () => {
   const notes = useSelector((state) => state.notes.notes)
   
   return (
-    <div className={`bg-slate-100 basis-[645px] pt-[20px]`}>
+    <div className='bg-slate-100 dark:bg-black basis-[645px] pt-[20px]'>
 
 
       <div className="w-[90vw] mx-auto grid gap-5 2xl:grid-cols-4 xl:grid-cols-3 md:grid-cols-2 grid-cols-1">
