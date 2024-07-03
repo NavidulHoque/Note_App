@@ -2,14 +2,13 @@
 import { useState } from "react"
 import logo from "../assets/logo.jpg"
 import { Link } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+import { toggleTheme } from "../features/notesSlice"
 
-const Navbar = ({ theme, setTheme }) => {
+const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false)
-
-    function handleTheme(theme) {
-        setTheme(theme)
-        localStorage.setItem("theme", JSON.stringify(theme))
-    }
+    const theme = useSelector(state => state.notes.theme)
+    const dispatch = useDispatch()
 
     return (
         <nav className="bg-white dark:bg-[rgb(50,50,50)] dark:text-white py-[10px] sticky">
@@ -26,7 +25,7 @@ const Navbar = ({ theme, setTheme }) => {
 
                     </div>
 
-                    <button onClick={() => theme === 'dark' ? handleTheme('light') : handleTheme('dark')} className="text-[24px] sm:hidden">
+                    <button onClick={() => theme === 'dark' ? dispatch(toggleTheme('light')) : dispatch(toggleTheme('dark'))} className="text-[24px] sm:hidden">
 
                         {theme === 'dark' ? <i className="fa-regular fa-sun text-white p-[12px] rounded-full hover:bg-[rgba(0,0,0,0.1)]"></i> : <i className="fa-regular fa-moon p-[12px] rounded-full hover:bg-[rgba(0,0,0,0.1)] w-[48px]"></i>}
 
@@ -43,7 +42,7 @@ const Navbar = ({ theme, setTheme }) => {
                     </li>
                 </ul>
 
-                <button onClick={() => theme === 'dark' ? handleTheme('light') : handleTheme('dark')} className="text-[24px] hidden sm:inline-block">
+                <button onClick={() => theme === 'dark' ? dispatch(toggleTheme('light')) : dispatch(toggleTheme('dark'))} className="text-[24px] hidden sm:inline-block">
 
                     {theme === 'dark' ? <i className="fa-regular fa-sun text-white p-[12px] rounded-full hover:bg-[rgba(0,0,0,0.1)]"></i> : <i className="fa-regular fa-moon p-[12px] rounded-full hover:bg-[rgba(0,0,0,0.1)] w-[48px]"></i>}
 

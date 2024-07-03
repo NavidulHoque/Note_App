@@ -5,7 +5,8 @@ const notesSlice = createSlice({
     initialState: {
         notes: JSON.parse(localStorage.getItem("notes")) || [],
         DeleteConfirmationMessageState: JSON.parse(localStorage.getItem("messageState")) || false,
-        userID: ""
+        userID: "",
+        theme: JSON.parse(localStorage.getItem("theme")) || "light",
     },
     reducers: {
         addNote: (state, action) => {
@@ -36,10 +37,16 @@ const notesSlice = createSlice({
             state.userID = action.payload
 
             localStorage.setItem("messageState", JSON.stringify(state.DeleteConfirmationMessageState))
+        },
+        toggleTheme: (state, action) => {
+
+            state.theme = action.payload
+            localStorage.setItem("theme", JSON.stringify(state.theme))
+
         }
     }
 })
 
-export const { addNote, deleteNote, updateNote, toggleDeleteConfirmationMessage } = notesSlice.actions
+export const { addNote, deleteNote, updateNote, toggleDeleteConfirmationMessage, toggleTheme } = notesSlice.actions
 export default notesSlice.reducer
 
