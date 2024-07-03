@@ -10,7 +10,15 @@ const SavedNotes = () => {
   const windowInnerWidth = window.innerWidth
 
   function handleShowMore() {
-    setShowHowMany(prev => prev + (windowInnerWidth < 1024 && windowInnerWidth >= 768 ? 4 : 3))
+    if (windowInnerWidth >= 1024) {
+      setShowHowMany(prev => prev + 3)
+    }
+    else if (windowInnerWidth < 1024 && windowInnerWidth >= 768) {
+      setShowHowMany(prev => prev + 2)
+    }
+    else{
+      setShowHowMany(prev => (prev + 3) > notes.length ? notes.length : prev + 3)
+    }
   }
 
   function handleShowLess() {
@@ -21,7 +29,7 @@ const SavedNotes = () => {
       setShowHowMany(prev => prev - 2)
     }
     else{
-      setShowHowMany(prev => prev - 1)
+      setShowHowMany(prev => (prev - 3) > 6 ? (prev - 3) : 6)
     }
   }
 
