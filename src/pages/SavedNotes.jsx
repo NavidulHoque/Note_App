@@ -3,6 +3,7 @@ import { useSelector } from "react-redux"
 import SavedNote from "../components/SavedNote"
 import { Helmet } from 'react-helmet-async';
 import { useState } from "react";
+import { ToastContainer } from 'react-toastify';
 
 const SavedNotes = () => {
   const notes = useSelector((state) => state.notes.notes)
@@ -38,6 +39,7 @@ const SavedNotes = () => {
       <Helmet>
         <title>Saved Notes</title>
       </Helmet>
+      <ToastContainer />
       <div className='bg-slate-100 dark:bg-black basis-[645px] pt-[20px] flex flex-col gap-y-8 pb-[20px]'>
 
         <div className="w-[90vw] mx-auto grid gap-5 lg:grid-cols-3 md:grid-cols-2 grid-cols-1">

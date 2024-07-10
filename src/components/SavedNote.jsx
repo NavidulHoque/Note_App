@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
 
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { toggleDeleteConfirmationMessage, updateNote } from "../features/notesSlice"
 import { useRef, useState } from "react"
-import { convertAMPM } from "./ConvertAMPM"
 import { formatDistance } from 'date-fns'
+import { Bounce, toast } from 'react-toastify';
 
 const SavedNote = ({ note }) => {
   const dispatch = useDispatch()
@@ -12,6 +12,7 @@ const SavedNote = ({ note }) => {
   const [title, setTitle] = useState(note.title)
   const [description, setDescription] = useState(note.description)
   const inputRef = useRef(null)
+  const theme = useSelector(state => state.notes.theme)
 
   function handleDelete() {
     dispatch(toggleDeleteConfirmationMessage(note.id))
@@ -22,23 +23,49 @@ const SavedNote = ({ note }) => {
       setUpdate(false)
       inputRef.current.focus()
     }
-    else{
-      setUpdate(true)
-      dispatch(updateNote({
-        id: note.id,
-        title,
-        description,
-        savedDate: convertAMPM()
-      }))
+    else {
+
+      if (title && description) {
+        toast.success('Note Updated', {
+          position: "top-right",
+          autoClose: 1500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          theme,
+          transition: Bounce,
+        });
+  
+        setUpdate(true)
+        dispatch(updateNote({
+          id: note.id,
+          title,
+          description,
+          savedDate: new Date().toString()
+        }))
+      }
+      else{
+        toast.error("Please fill up the Note", {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          theme,
+          transition: Bounce,
+      });
+      }
     }
   }
 
   return (
     <div className="min-w-[300px] bg-white border-[1px] border-black dark:border-white dark:bg-[rgb(50,50,50)] dark:text-white shadow-md rounded-md p-[10px] flex flex-col gap-y-2">
 
-      <input ref={inputRef} className="text-[24px] outline-none w-full dark:bg-[rgb(50,50,50)] font-semibold" onChange={(e) => setTitle(e.target.value)} value={title} readOnly={update} />
+      <input ref={inputRef} className={`p-[5px] text-[24px] outline-none w-full dark:bg-[rgb(50,50,50)] font-semibold ${update ? '' : 'rounded-md border-[2px] border-[#3498db]'}`} placeholder="Title" onChange={(e) => setTitle(e.target.value)} value={title} readOnly={update} />
 
-      <textarea className="text-[18px] resize-none w-full outline-none dark:bg-[rgb(50,50,50)]" onChange={(e) => setDescription(e.target.value)} value={description} readOnly={update} maxLength={200} rows={4} />
+      <textarea className={`p-[5px] text-[18px] resize-none w-full outline-none dark:bg-[rgb(50,50,50)] ${update ? '' : 'rounded-md border-[2px] border-[#3498db]'}`} placeholder="Description" onChange={(e) => setDescription(e.target.value)} value={description} readOnly={update} maxLength={200} rows={4} />
 
       <span className="text-[18px] text-slate-500 dark:text-slate-300">{formatDistance(note.savedDate, new Date(), { addSuffix: true })}</span>
 

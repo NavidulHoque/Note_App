@@ -1,7 +1,6 @@
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { addNote } from "../features/notesSlice"
-import { convertAMPM } from "../components/ConvertAMPM"
 import { Bounce, ToastContainer, toast } from 'react-toastify';
 import { Helmet } from 'react-helmet-async';
 
@@ -17,7 +16,7 @@ const Home = () => {
                 id: Date.now().toString(32),
                 title,
                 description,
-                savedDate: convertAMPM()
+                savedDate: new Date().toString()
             }))
 
             setTitle("")
