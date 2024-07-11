@@ -2,23 +2,36 @@
 
 import { useDispatch, useSelector } from "react-redux"
 import { toggleDeleteConfirmationMessage, updateNote } from "../features/notesSlice"
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { formatDistance } from 'date-fns'
 import { Bounce, toast } from 'react-toastify';
 
 const SavedNote = ({ note }) => {
+
   const dispatch = useDispatch()
   const [update, setUpdate] = useState(true)
+  const [cancel, setCancel] = useState(false)
   const [title, setTitle] = useState(note.title)
   const [description, setDescription] = useState(note.description)
   const inputRef = useRef(null)
   const theme = useSelector(state => state.notes.theme)
+
+  useEffect(() => {
+
+    if (cancel) {
+      setTitle(note.title)
+      setDescription(note.description)
+    }
+
+  }, [cancel])
+
 
   function handleDelete() {
     dispatch(toggleDeleteConfirmationMessage(note.id))
   }
 
   function handleUpdate() {
+
     if (update) {
       setUpdate(false)
       inputRef.current.focus()
@@ -36,7 +49,7 @@ const SavedNote = ({ note }) => {
           theme,
           transition: Bounce,
         });
-  
+
         setUpdate(true)
         dispatch(updateNote({
           id: note.id,
@@ -45,7 +58,7 @@ const SavedNote = ({ note }) => {
           savedDate: new Date().toString()
         }))
       }
-      else{
+      else {
         toast.error("Please fill up the Note", {
           position: "top-right",
           autoClose: 2000,
@@ -55,9 +68,14 @@ const SavedNote = ({ note }) => {
           draggable: true,
           theme,
           transition: Bounce,
-      });
+        });
       }
     }
+  }
+
+  function handleCancel() {
+    setCancel(true)
+    setUpdate(true)
   }
 
   return (
@@ -70,6 +88,8 @@ const SavedNote = ({ note }) => {
       <span className="text-[18px] text-slate-500 dark:text-slate-300">{formatDistance(note.savedDate, new Date(), { addSuffix: true })}</span>
 
       <div className="flex gap-x-3 text-white w-full justify-end">
+
+        {!update && <button onClick={handleCancel} className="w-[75px] bg-[#9b59b6] hover:bg-[#8e44ad] rounded-md py-[7px] text-[18px]">Cancel</button>}        
 
         <button onClick={handleUpdate} className="w-[75px] bg-[#9b59b6] hover:bg-[#8e44ad] rounded-md py-[7px] text-[18px]">{update ? "Update" : "Save"}</button>
 
