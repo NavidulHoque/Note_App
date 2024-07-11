@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 
 import { useDispatch, useSelector } from "react-redux"
@@ -21,6 +22,7 @@ const SavedNote = ({ note }) => {
     if (cancel) {
       setTitle(note.title)
       setDescription(note.description)
+      setCancel(false)
     }
 
   }, [cancel])
@@ -81,9 +83,9 @@ const SavedNote = ({ note }) => {
   return (
     <div className="min-w-[300px] bg-white border-[1px] border-black dark:border-white dark:bg-[rgb(50,50,50)] dark:text-white shadow-md rounded-md p-[10px] flex flex-col gap-y-2">
 
-      <input ref={inputRef} className={`p-[5px] text-[24px] outline-none w-full dark:bg-[rgb(50,50,50)] font-semibold ${update ? '' : 'rounded-md border-[2px] border-[#3498db]'}`} placeholder="Title" onChange={(e) => setTitle(e.target.value)} value={title} readOnly={update} />
+      <input ref={inputRef} className="p-[5px] text-[24px] outline-none w-full dark:bg-[rgb(50,50,50)] font-semibold" placeholder="Title" onChange={(e) => setTitle(e.target.value)} value={title} readOnly={update} />
 
-      <textarea className={`p-[5px] text-[18px] resize-none w-full outline-none dark:bg-[rgb(50,50,50)] ${update ? '' : 'rounded-md border-[2px] border-[#3498db]'}`} placeholder="Description" onChange={(e) => setDescription(e.target.value)} value={description} readOnly={update} maxLength={200} rows={4} />
+      <textarea className="p-[5px] text-[18px] resize-none w-full outline-none dark:bg-[rgb(50,50,50)]" placeholder="Description" onChange={(e) => setDescription(e.target.value)} value={description} readOnly={update} maxLength={200} rows={4} />
 
       <span className="text-[18px] text-slate-500 dark:text-slate-300">{formatDistance(note.savedDate, new Date(), { addSuffix: true })}</span>
 
