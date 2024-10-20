@@ -10,7 +10,7 @@ const RootLayout = () => {
   return (
     <div className={theme}>
 
-      <div className='min-h-screen relative'>
+      <div className='min-h-screen relative text-lg md:text-xl lg:text-2xl'>
 
         {DeleteConfirmationMessageState && <DeleteConfirmationMessage DeleteConfirmationMessageState={DeleteConfirmationMessageState} />}
 
