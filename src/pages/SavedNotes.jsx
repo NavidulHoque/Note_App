@@ -40,7 +40,7 @@ const SavedNotes = () => {
         <title>Saved Notes</title>
       </Helmet>
       <ToastContainer />
-      <div className='bg-slate-100 dark:bg-black basis-[645px] pt-[20px] flex flex-col gap-y-8 pb-[20px]'>
+      <div className='bg-slate-100 dark:bg-black basis-[645px] min-h-[90vh] pt-[20px] flex flex-col gap-y-8 pb-[20px]'>
 
         <div className="w-[90vw] mx-auto grid gap-5 lg:grid-cols-3 md:grid-cols-2 grid-cols-1">
 

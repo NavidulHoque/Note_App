@@ -70,7 +70,7 @@ const Home = () => {
                 <title>Add Note</title>
             </Helmet>
             <ToastContainer />
-            <div className="bg-slate-100 dark:bg-black flex justify-center items-center basis-[645px] font-mono">
+            <div className="bg-slate-100 dark:bg-black basis-[645px] h-[90vh] flex justify-center items-center font-mono">
 
                 <div className="flex flex-col items-start gap-y-2 rounded-md p-[10px] text-[24px] w-[80vw] sm:basis-[600px] bg-white dark:bg-[rgb(50,50,50)] shadow-md">
 

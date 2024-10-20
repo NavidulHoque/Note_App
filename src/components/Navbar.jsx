@@ -11,7 +11,7 @@ const Navbar = () => {
     const dispatch = useDispatch()
 
     return (
-        <nav className="bg-white dark:bg-[rgb(50,50,50)] dark:text-white py-[10px] sticky">
+        <nav className="bg-white dark:bg-[rgb(50,50,50)] h-[10vh] dark:text-white py-[10px] sticky">
 
             <div className="w-[90vw] h-full mx-auto flex flex-col sm:flex-row justify-center sm:justify-between items-center gap-x-5">
 
